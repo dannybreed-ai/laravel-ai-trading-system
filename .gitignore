@@ -1,0 +1,27 @@
+# Laravel .gitignore
+
+# Laravel specific
+/vendor/
+/node_modules/
+/.env
+/storage/
+/.idea/
+/.vscode/
+/.DS_Store
+Thumbs.db
+
+# IDE files
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# AI Trading System specific
+/uploads/
+/kyc_documents/
+/backups/
+/trading_logs/
+/config/sensitive/*.php
