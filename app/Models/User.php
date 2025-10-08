@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\GeneratesReferralCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, GeneratesReferralCode;
 
     protected $fillable = [
         'name',
@@ -24,6 +25,7 @@ class User extends Authenticatable
         'date_of_birth',
         'balance',
         'status',
+        'is_admin',
         'referral_code',
         'referred_by',
         'kyc_verified_at',
@@ -47,6 +49,7 @@ class User extends Authenticatable
         'date_of_birth' => 'date',
         'balance' => 'decimal:2',
         'status' => 'boolean',
+        'is_admin' => 'boolean',
         'two_factor_enabled' => 'boolean',
         'preferences' => 'array',
         'password' => 'hashed',
@@ -112,6 +115,16 @@ class User extends Authenticatable
         return !is_null($this->kyc_verified_at);
     }
 
+    public function kycVerified()
+    {
+        return $this->isKycVerified();
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
     public function hasTwoFactorEnabled()
     {
         return $this->two_factor_enabled;
@@ -145,15 +158,6 @@ class User extends Authenticatable
                     ->count();
     }
 
-    public static function generateReferralCode()
-    {
-        do {
-            $code = strtoupper(substr(str_shuffle('ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'), 0, 8));
-        } while (self::where('referral_code', $code)->exists());
-
-        return $code;
-    }
-
     public function scopeActive($query)
     {
         return $query->where('status', 1);
@@ -162,16 +166,5 @@ class User extends Authenticatable
     public function scopeKycVerified($query)
     {
         return $query->whereNotNull('kyc_verified_at');
-    }
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($user) {
-            if (empty($user->referral_code)) {
-                $user->referral_code = self::generateReferralCode();
-            }
-        });
     }
 }
