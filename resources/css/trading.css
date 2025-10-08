@@ -1,0 +1,95 @@
+/* Trading-specific styles */
+
+.bot-card {
+    @apply bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow;
+}
+
+.bot-card-header {
+    @apply flex justify-between items-center mb-4;
+}
+
+.bot-name {
+    @apply text-lg font-semibold text-gray-900;
+}
+
+.risk-badge {
+    @apply px-3 py-1 text-xs rounded-full font-medium;
+}
+
+.risk-badge-low {
+    @apply bg-green-100 text-green-800;
+}
+
+.risk-badge-medium {
+    @apply bg-yellow-100 text-yellow-800;
+}
+
+.risk-badge-high {
+    @apply bg-red-100 text-red-800;
+}
+
+/* Activation status */
+.activation-active {
+    @apply border-l-4 border-green-500;
+}
+
+.activation-closed {
+    @apply border-l-4 border-gray-400;
+}
+
+.activation-pending {
+    @apply border-l-4 border-yellow-500;
+}
+
+/* Profit/Loss indicators */
+.profit-positive {
+    @apply text-tradingGreen font-bold;
+}
+
+.profit-negative {
+    @apply text-tradingRed font-bold;
+}
+
+.profit-neutral {
+    @apply text-gray-600 font-medium;
+}
+
+/* Trading chart */
+.trading-chart {
+    @apply bg-white shadow rounded-lg p-4;
+}
+
+/* Bot activation modal */
+.activation-modal {
+    @apply fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50;
+}
+
+.activation-modal-content {
+    @apply relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white;
+}
+
+/* Investment slider */
+.investment-slider {
+    @apply w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer;
+}
+
+.investment-slider::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 bg-primary rounded-full cursor-pointer;
+}
+
+.investment-slider::-moz-range-thumb {
+    @apply w-4 h-4 bg-primary rounded-full cursor-pointer;
+}
+
+/* Trading stats */
+.trading-stat {
+    @apply bg-white rounded-lg p-4 shadow-sm border border-gray-200;
+}
+
+.trading-stat-value {
+    @apply text-2xl font-bold text-gray-900;
+}
+
+.trading-stat-label {
+    @apply text-sm text-gray-600;
+}
