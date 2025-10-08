@@ -12,7 +12,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // Policies will be registered here in Phase 7
+        \App\Models\Deposit::class => \App\Policies\DepositPolicy::class,
+        \App\Models\Withdrawal::class => \App\Policies\WithdrawalPolicy::class,
+        \App\Models\BotActivation::class => \App\Policies\BotActivationPolicy::class,
     ];
 
     /**
